@@ -23,14 +23,14 @@ jobs:
       uses: docker/login-action@v2
       with:
         registry: https://mdcregistry.azurecr.io/
-        username: ${{ secrets.AzureAppService_ContainerUsername_12bdf82665e64b28bd13bf67b657ea4e }}
-        password: ${{ secrets.AzureAppService_ContainerPassword_1dcf08cde1e9452897d41bf31885ccaa }}
+        username: ${{ secrets.AzureAppService_ContainerUsername_33efee2d1f9846fa82109bdd0ec7b66c }}
+        password: ${{ secrets.AzureAppService_ContainerPassword_61d954214f0742f08a569ee6afff5793 }}
 
     - name: Build and push container image to registry
       uses: docker/build-push-action@v3
       with:
         push: true
-        tags: mdcregistry.azurecr.io/${{ secrets.AzureAppService_ContainerUsername_12bdf82665e64b28bd13bf67b657ea4e }}/chatgptcont:${{ github.sha }}
+        tags: mdcregistry.azurecr.io/${{ secrets.AzureAppService_ContainerUsername_33efee2d1f9846fa82109bdd0ec7b66c }}/mcr.microsoft.com/appsvc/staticsite:${{ github.sha }}
         file: ./Dockerfile
 
   deploy:
@@ -47,5 +47,5 @@ jobs:
       with:
         app-name: 'chatgptcont'
         slot-name: 'production'
-        publish-profile: ${{ secrets.AzureAppService_PublishProfile_01acff2804704cd699f75bd771f643d4 }}
-        images: 'mdcregistry.azurecr.io/${{ secrets.AzureAppService_ContainerUsername_12bdf82665e64b28bd13bf67b657ea4e }}/chatgptcont:${{ github.sha }}'
+        publish-profile: ${{ secrets.AzureAppService_PublishProfile_93874f524ed54d73929e953da26e844c }}
+        images: 'mdcregistry.azurecr.io/${{ secrets.AzureAppService_ContainerUsername_33efee2d1f9846fa82109bdd0ec7b66c }}/mcr.microsoft.com/appsvc/staticsite:${{ github.sha }}'
